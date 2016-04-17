@@ -1,0 +1,78 @@
+---
+title       : IS YOUR FOOD SAFE?
+subtitle    : Outcome of Domestic Food Facilities Inspections
+author      : Yi Liu
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap]  # mathjax, quiz, bootstrap
+ext_widgets : {rCharts: libraries/nvd3} # {rCharts: ["libraries/highcharts",                                              # "libraries/nvd3", "libraries/morris"]}
+mode        : selfcontained         # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+# Introduction
+
+## Some may think food safety is not a problem in US...  
+
+### Over **300,000** Americans are hospitalized every year due to contaminated foods or beverages  
+### **5,000** out of those end up with **_death_**  
+  
+  The Center for Food Safety and Applied Nutrition (CFSAN)
+  is responsible for carrying out the inspections and specific tests        with only a little over 800 employees.
+  
+  This Shiny app will demostrate some results for the outcome of food
+  safety inspection by CFSAN.
+
+---
+# Possible inspection outcomes: 
+###    1. Official Action Indicated (**OAI**):  
+        significant objectionable conditions are found and regulatory 
+        action is warranted  
+###    2. Voluntary Action Indicated (**VAI**):  
+        objectionable conditions are found, but not at a level that 
+        warrants regulatory action  
+###    3. No Action Indicated (**NAI**):  
+        no objectionable condition is found  
+
+---
+## Got interested?  
+
+### example at next slide
+[More at this Shiny App](https://chaorenliuyi.shinyapps.io/shiny)
+
+### This is just a casual exploratory look for the food safety data
+  
+  
+### Tons of places to look.  
+  
+[wiki page for __food safety risk analysis__](https://en.wikipedia.org/wiki/Food_safety_risk_analysis)  
+
+[foodrisk.org](http://foodrisk.org/)  
+# ...  
+...
+
+---
+## Preliminary exploration 
+
+```{r setup,cache = F, message = F, echo = F}
+require(rCharts)
+knitr::opts_chunk$set(comment = NA, results = 'asis', tidy = F, message = T)
+```
+```{r, echo = FALSE, results = 'hide', message=FALSE, warning=FALSE}
+require(slidifyLibraries)
+require(rCharts)
+urban =readRDS('urban.rds')
+```
+```{r nvd3plot, results = 'asis', comment = NA, message = F, echo = F}
+n1 <- nPlot(X ~ District.Decision, group = 'urban',
+            type = 'multiBarChart', data = urban)
+options(RCHART_WIDTH = 800, RCHART_HEIGHT = 550)
+# n1$print("chart1", include_assets=TRUE, cdn=TRUE)
+n1$show('inline', include_assets = TRUE, cdn = TRUE)
+```
+
+
+
+
